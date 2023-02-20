@@ -1,24 +1,33 @@
-let slideIndex = 0;
-showSlides();
+let headlineIndex = 0;
+startHeadline();
 
-function showSlides() {
+function startHeadline() {
+  let i;
+  let slides = document.getElementsByClassName("headline_placeholder");
+  let dots = document.getElementsByClassName("headline_dot");
+  headlineIndex++;
+  if (headlineIndex > slides.length) {
+    headlineIndex = 1;
+  }
+  let n = headlineIndex - 1;
+  showHeadline(n);
+  setTimeout(startHeadline, 5000);
+}
+
+function showHeadline(n) {
   let i;
   let slides = document.getElementsByClassName("headline_placeholder");
   let dots = document.getElementsByClassName("headline_dot");
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-  slideIndex++;
-  if (slideIndex > slides.length) {
-    slideIndex = 1;
-  }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex - 1].style.display = "block";
-  dots[slideIndex - 1].className += " active";
-  setTimeout(showSlides, 5000);
+  slides[n].style.display = "block";
+  dots[n].className += " active";
 }
+
 /* <div class="headline_wrapper">
         <span id="headline-1"></span>
         <span id="headline-2"></span>
